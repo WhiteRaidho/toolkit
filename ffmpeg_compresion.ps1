@@ -1,0 +1,1 @@
+ffmpeg -i $args[0] -c:v hevc_nvenc -preset p7 -rc vbr -cq 38 -c:a aac -b:a 250k $args[1]
