@@ -1,4 +1,4 @@
-namespace SubConverter.Writers;
+namespace SubConverter.Engine.Writers;
 
 public interface IWriter
 {

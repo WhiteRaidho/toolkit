@@ -1,7 +1,7 @@
 
 using System.Text;
 
-namespace SubConverter.Writers;
+namespace SubConverter.Engine.Writers;
 
 public class SrtWriter : IWriter
 {

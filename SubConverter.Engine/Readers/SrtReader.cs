@@ -1,7 +1,7 @@
 
 using System.Text;
 
-namespace SubConverter.Readers;
+namespace SubConverter.Engine.Readers;
 
 public class SrtReader : IReader
 {

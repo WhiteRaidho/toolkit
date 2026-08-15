@@ -1,4 +1,4 @@
-namespace SubConverter;
+namespace SubConverter.Engine;
 
 public enum SupportedFormat
 {

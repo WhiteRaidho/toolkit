@@ -1,4 +1,4 @@
-namespace SubConverter.Readers;
+namespace SubConverter.Engine.Readers;
 
 public interface IReader
 {

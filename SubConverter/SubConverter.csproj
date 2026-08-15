@@ -11,4 +11,8 @@
     <PackageReference Include="System.CommandLine" Version="2.0.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SubConverter.Engine\SubConverter.Engine.csproj" />
+  </ItemGroup>
+
 </Project>

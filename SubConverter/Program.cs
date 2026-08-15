@@ -1,8 +1,5 @@
 ﻿using System.CommandLine;
-using SubConverter;
-using SubConverter.Readers;
-using SubConverter.Writers;
-
+using SubConverter.Engine;
 
 RootCommand rootCommand = new("Subtitles command-line converter");
 
@@ -38,6 +35,8 @@ Option<float> framerateOption = new("--framerate", "-fr")
     Description = "Framerate used when calculating time for frame specified formats (like MicroDVD .sub). Popular framerates: 23.98, 24, 25, 48, 60",
     DefaultValueFactory = _ => 24
 };
+
+// TODO: add target framerate for conversion between two frame rate specific formats (e.g.: MicroDVD 25 fps -> MicroDVD 24 fps)
 
 Option<TimeSpan> offestOption = new("--offset")
 {
@@ -78,34 +77,15 @@ rootCommand.SetAction(parseResult =>
         WriteError(ex);
     }
 
-    Console.WriteLine("Reading input file");
-    List<InternalSubtitle>? subtitles = null;
-    IReader reader = ReadersFactory.GetReader(inputFormat.GetValueOrDefault());
+    Console.WriteLine("Converting...");
     try
     {
-        subtitles = reader.Read(inputFile, info);
-        Console.WriteLine($"Found {subtitles.Count} subtitles");
+        SubtitlesConverter.Convert(inputFile, inputFormat.Value, outputFile, outputFormat, info);
     }
     catch (FormatException ex)
     {
         WriteError(ex);
     }
-
-    if (info.Offset != TimeSpan.Zero && subtitles is not null)
-    {
-        var newSubtitles = new List<InternalSubtitle>();
-        foreach (var sub in subtitles)
-        {
-            var start = sub.Start + info.Offset;
-            var end = sub.End + info.Offset;
-            newSubtitles.Add(new(sub.Index, start, end, sub.Text));
-        }
-        subtitles = newSubtitles;
-    }
-
-    Console.WriteLine($"Converting to: [{outputFormat}] and saving to file: {outputFile}");
-    IWriter writer = WritersFactory.GetWriter(outputFormat);
-    writer.Write(outputFile, subtitles, info);
 });
 
 return rootCommand.Parse(args).Invoke();
