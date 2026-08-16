@@ -77,6 +77,12 @@ rootCommand.SetAction(parseResult =>
         WriteError(ex);
     }
 
+    if(!inputFormat.HasValue)
+    {
+        WriteError(new ArgumentException("Format detection went wrong, try to specify it using --if"));
+        return;
+    }
+
     Console.WriteLine("Converting...");
     try
     {
