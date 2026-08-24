@@ -65,7 +65,7 @@
 
         <NumberBox
             x:Name="FramerateBox"
-            Header="Framerate"
+            Header="Framerate (Frame dependent formats only)"
             Value="24"
             SmallChange="0.1"
             SpinButtonPlacementMode="Compact"/>

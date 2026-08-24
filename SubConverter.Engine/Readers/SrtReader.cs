@@ -55,7 +55,7 @@ public class SrtReader : IReader
 
         CheckEndOfFile(linePointer);
 
-        // Read second lien as [start] --> [end]
+        // Read second line as [start] --> [end]
         var timeLine = lines[linePointer++];
         var times = timeLine.Split("-->");
         if(times.Length != 2) throw new FormatException($"Wrong format in line {linePointer - 1}, expected timestamps in format \"[start] --> [end]\", instead got: {timeLine}");
