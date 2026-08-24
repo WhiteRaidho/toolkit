@@ -4,4 +4,5 @@ public enum SupportedFormat
 {
     sub,
     srt,
+    vtt
 }
