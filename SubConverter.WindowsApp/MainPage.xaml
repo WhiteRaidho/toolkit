@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="SubConverter_WindowsApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:SubConverter_WindowsApp"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel
+        Padding="30"
+        Spacing="12">
+
+        <StackPanel Spacing="4">
+            <TextBlock Text="Input file"/>
+
+            <Grid ColumnSpacing="8"
+                  ColumnDefinitions="*, Auto"
+                  AllowDrop="True"
+                  DragOver="InputFile_DragOver"
+                  Drop="InputFile_Drop">
+                <TextBox
+                    x:Name="InputFileTextBox"
+                    Grid.Column="0"
+                    IsReadOnly="True"/>
+                <Button
+                    Grid.Column="1"
+                    Content="Browse..."
+                    Click="BrowseFile_Click"/>
+            </Grid>
+        </StackPanel>
+
+        <Grid ColumnSpacing="24"
+              ColumnDefinitions="Auto, Auto">
+            <ComboBox
+                Grid.Column="0"
+                x:Name="InputFormatBox"
+                Header="Input format">
+                <!-- enum values -->
+            </ComboBox>
+
+            <ComboBox
+                Grid.Column="1"
+                x:Name="OutputFormatBox"
+                Header="Output format">
+                <!-- enum values -->
+            </ComboBox>
+        </Grid>
+
+        <StackPanel Spacing="4">
+            <TextBox
+                x:Name="OffsetTextBox"
+                Header="Offset"
+                PlaceholderText="00:00:00.000"
+                Text="00:00:00.000"
+                LostFocus="OffsetTextBox_LostFocus"/>
+
+            <TextBlock
+                x:Name="OffsetErrorText"
+                Text="Invalid offset. Expected format: 00:00:00.000"
+                Visibility="Collapsed"
+                Foreground="Red"/>
+        </StackPanel>
+
+        <NumberBox
+            x:Name="FramerateBox"
+            Header="Framerate"
+            Value="24"
+            SmallChange="0.1"
+            SpinButtonPlacementMode="Compact"/>
+
+        <Button
+            Content="Execute"
+            Click="Execute_Click"/>
+
+        <TextBlock
+            x:Name="ExecuteErrorText"
+            Text=""
+            Visibility="Collapsed"
+            Foreground="Red"/>
+
+    </StackPanel>
+</Page>
