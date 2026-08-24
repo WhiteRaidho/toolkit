@@ -25,4 +25,13 @@ public static class SubtitlesConverter
         IWriter writer = WritersFactory.GetWriter(outputFormat);
         writer.Write(outputFile, subtitles, info);
     }
+
+    public static SupportedFormat GetFormat(FileInfo file)
+    {
+        var extension = Path.GetExtension(file.FullName).TrimStart('.').ToLower();
+        if(!Enum.TryParse<SupportedFormat>(extension.ToLower(), out SupportedFormat result))
+            throw new FormatException($"[{extension}] is not supported.");
+
+        return result;
+    }
 }

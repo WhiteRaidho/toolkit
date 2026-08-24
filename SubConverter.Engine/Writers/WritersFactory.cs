@@ -6,6 +6,7 @@ public static class WritersFactory {
         return format switch
         {
             SupportedFormat.srt => new SrtWriter(),
+            SupportedFormat.sub => new MicroDVDWriter(),
             _ => throw new NotImplementedException($"Writer for [{format}] not implemented yet")
         };
     }
